@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva Capacitación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input, select {
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Nueva Capacitación</h1>
+    <form th:action="@{/capacitaciones/guardarCapacitaciones}" th:object="${capacitaciones}" method="post">
+
+        <!-- Descripción -->
+        <label for="desCapacitacion">Descripción</label>
+        <input type="text" id="desCapacitacion" th:field="*{desCapacitacion}" placeholder="Descripción de la capacitación" required />
+
+        <!-- Fecha de Inicio -->
+        <label for="fechaInicio">Fecha de Inicio</label>
+        <input type="date" id="fechaInicio" th:field="*{fechaInicio}" required />
+
+        <!-- Fecha de Fin -->
+        <label for="fechaFin">Fecha de Fin</label>
+        <input type="date" id="fechaFin" th:field="*{fechaFin}" required />
+
+        <!-- Estado -->
+        <label for="estado">Estado</label>
+        <select id="estado" th:field="*{estado}" required>
+            <option value="0" th:selected="*{estado == 0}">Programado</option>
+            <option value="1" th:selected="*{estado == 1}">Realizado</option>
+            <option value="2" th:selected="*{estado == 2}">Postergado</option>
+        </select>
+
+        <!-- Créditos -->
+        <label for="creditos">Créditos</label>
+        <input type="number" id="creditos" th:field="*{creditos}" placeholder="Créditos otorgados" required />
+
+        <!-- Botón de guardar -->
+        <button type="submit">Crear Capacitación</button>
+    </form>
+</div>
+</body>
+</html>
